@@ -68,7 +68,7 @@ const Index = () => {
             className="mb-12"
           />
           
-          <div className="flex items-center justify-center gap-4 opacity-0 animate-fade-in-delay-3">
+          <div className="flex items-center justify-center gap-4 mt-8">
             <Button
               variant="gianni-premium"
               size="lg"
@@ -91,26 +91,26 @@ const Index = () => {
         </div>
         
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in-delay-3">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
           <div className="w-px h-12 bg-gradient-to-b from-gianni-orange to-transparent animate-pulse" />
         </div>
       </div>
 
       <div className="container mx-auto px-6 py-16 space-y-24">
         {/* Morning Briefing */}
-        <div className="opacity-0 animate-fade-in-delay-1">
+        <div>
           <MorningBriefing />
         </div>
 
         {/* Quick Stats */}
-        <div className="opacity-0 animate-fade-in-delay-2">
+        <div>
           <QuickStats />
         </div>
 
         {/* Life Spaces Grid */}
-        <div className="opacity-0 animate-fade-in-delay-3">
+        <div>
           <div className="text-center mb-16">
-            <h2 className="text-display-sm font-helvetica font-light text-gianni-text-primary mb-4 tracking-tight">
+            <h2 className="text-5xl font-helvetica font-light text-gianni-text-primary mb-4 tracking-tight">
               Przestrzenie życia
             </h2>
             <p className="text-lg text-gianni-text-secondary font-light max-w-2xl mx-auto">
@@ -120,29 +120,22 @@ const Index = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {lifeSpaces.map((space, index) => (
-              <div
+              <LifeSpaceCard
                 key={space.title}
-                className="opacity-0"
-                style={{ 
-                  animation: `slideUp 0.8s var(--ease-spring) ${0.4 + index * 0.1}s forwards`
-                }}
-              >
-                <LifeSpaceCard
-                  {...space}
-                  onClick={() => console.log(`Opening ${space.title}`)}
-                />
-              </div>
+                {...space}
+                onClick={() => console.log(`Opening ${space.title}`)}
+              />
             ))}
           </div>
         </div>
 
         {/* Quick Entry */}
-        <div className="opacity-0 animate-slide-up-delay-3">
+        <div>
           <QuickEntry />
         </div>
 
         {/* Sophisticated Footer */}
-        <div className="text-center py-16 border-t border-border/20 opacity-0 animate-fade-in-delay-3">
+        <div className="text-center py-16 border-t border-border/20">
           <p className="text-gianni-text-tertiary text-sm font-helvetica font-light">
             Wykonane z ❤️ dla osobistego rozwoju
           </p>

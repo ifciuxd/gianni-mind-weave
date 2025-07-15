@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export function FloatingNav() {
   return (
-    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 animate-glass-fade opacity-0">
+    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
       <div className="bg-glass-white backdrop-blur-xl border border-glass-border rounded-2xl px-6 py-3 shadow-glass">
         <div className="flex items-center gap-4">
           <div className="text-gianni-text-primary font-helvetica font-medium text-sm">

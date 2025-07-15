@@ -29,7 +29,6 @@ export function LifeSpaceCard({
         "hover:border-gianni-orange/50 hover:bg-gianni-card-elevated",
         "transition-all duration-500 ease-spring",
         "hover:scale-[1.03] hover:shadow-card-hover",
-        "animate-slide-up opacity-0",
         "before:absolute before:inset-0 before:bg-gradient-mesh before:opacity-0 before:transition-opacity before:duration-500",
         "hover:before:opacity-100",
         className

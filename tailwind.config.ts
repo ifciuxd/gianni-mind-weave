@@ -107,27 +107,27 @@ export default {
 			},
 			animation: {
 				// Staggered reveals
-				'fade-in': 'fadeIn 0.6s var(--ease-apple) forwards',
-				'fade-in-delay-1': 'fadeIn 0.6s var(--ease-apple) 0.1s forwards',
-				'fade-in-delay-2': 'fadeIn 0.6s var(--ease-apple) 0.2s forwards',
-				'fade-in-delay-3': 'fadeIn 0.6s var(--ease-apple) 0.3s forwards',
+				'fade-in': 'fadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+				'fade-in-delay-1': 'fadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards',
+				'fade-in-delay-2': 'fadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards',
+				'fade-in-delay-3': 'fadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards',
 				
 				// Sophisticated entrances
-				'slide-up': 'slideUp 0.8s var(--ease-spring) forwards',
-				'slide-up-delay-1': 'slideUp 0.8s var(--ease-spring) 0.1s forwards',
-				'slide-up-delay-2': 'slideUp 0.8s var(--ease-spring) 0.2s forwards',
-				'slide-up-delay-3': 'slideUp 0.8s var(--ease-spring) 0.3s forwards',
+				'slide-up': 'slideUp 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards',
+				'slide-up-delay-1': 'slideUp 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) 0.1s forwards',
+				'slide-up-delay-2': 'slideUp 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) 0.2s forwards',
+				'slide-up-delay-3': 'slideUp 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) 0.3s forwards',
 				
 				// Scale animations
-				'scale-in': 'scaleIn 0.5s var(--ease-spring) forwards',
-				'scale-in-subtle': 'scaleInSubtle 0.4s var(--ease-apple) forwards',
+				'scale-in': 'scaleIn 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards',
+				'scale-in-subtle': 'scaleInSubtle 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
 				
 				// Kinetic typography
-				'title-reveal': 'titleReveal 1.2s var(--ease-spring) forwards',
-				'char-reveal': 'charReveal 0.8s var(--ease-apple) forwards',
+				'title-reveal': 'titleReveal 1.2s cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards',
+				'char-reveal': 'charReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
 				
 				// Magnetic effects
-				'magnetic-hover': 'magneticHover 0.3s var(--ease-apple) forwards',
+				'magnetic-hover': 'magneticHover 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
 				'float': 'float 6s ease-in-out infinite',
 				
 				// Advanced glows
@@ -135,7 +135,11 @@ export default {
 				'orange-glow': 'orangeGlow 2s ease-in-out infinite',
 				
 				// Glass morphism
-				'glass-fade': 'glassFade 0.4s var(--ease-apple) forwards',
+				'glass-fade': 'glassFade 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+				
+				// Accordion animations
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out'
 			},
 			keyframes: {
 				// Entrance animations
@@ -200,10 +204,10 @@ export default {
 				}
 			},
 			transitionTimingFunction: {
-				'apple': 'var(--ease-apple)',
-				'spring': 'var(--ease-spring)',
-				'smooth': 'var(--ease-smooth)',
-				'gentle': 'var(--ease-gentle)'
+				'apple': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+				'spring': 'cubic-bezier(0.68, -0.6, 0.32, 1.6)',
+				'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+				'gentle': 'cubic-bezier(0.25, 0.1, 0.25, 1)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
