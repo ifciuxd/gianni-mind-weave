@@ -1,10 +1,11 @@
-import { Users, GraduationCap, Briefcase, Target, Heart, Plus } from "lucide-react";
+import { Users, GraduationCap, Briefcase, Target, Heart, Plus, ArrowUpRight } from "lucide-react";
 import { LifeSpaceCard } from "@/components/dashboard/LifeSpaceCard";
 import { MorningBriefing } from "@/components/dashboard/MorningBriefing";
 import { QuickStats } from "@/components/dashboard/QuickStats";
 import { QuickEntry } from "@/components/dashboard/QuickEntry";
 import { Button } from "@/components/ui/button";
-import dashboardHero from "@/assets/dashboard-hero.jpg";
+import { FloatingNav } from "@/components/ui/floating-nav";
+import { KineticTitle } from "@/components/ui/kinetic-title";
 
 const Index = () => {
   const lifeSpaces = [
@@ -46,63 +47,103 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <div className="relative h-64 overflow-hidden">
-        <img 
-          src={dashboardHero} 
-          alt="Dashboard Hero" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-        <div className="absolute bottom-6 left-6">
-          <h1 className="text-4xl font-bold text-gianni-text-primary mb-2">
-            Gianni
-          </h1>
-          <p className="text-gianni-text-secondary">
-            Twój personalny Second Brain
-          </p>
+    <div className="min-h-screen bg-background font-helvetica">
+      {/* Floating Navigation */}
+      <FloatingNav />
+      
+      {/* Sophisticated Hero Section */}
+      <div className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+        {/* Mesh gradient background */}
+        <div className="absolute inset-0 bg-gradient-mesh opacity-60" />
+        
+        {/* Floating orbs */}
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gianni-orange/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-gianni-orange-glow/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+        
+        {/* Hero content */}
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
+          <KineticTitle 
+            text="Gianni"
+            subtitle="Twój personalny Second Brain"
+            className="mb-12"
+          />
+          
+          <div className="flex items-center justify-center gap-4 opacity-0 animate-fade-in-delay-3">
+            <Button
+              variant="gianni-premium"
+              size="lg"
+              className="group"
+            >
+              <Plus className="h-5 w-5 mr-2 transition-transform group-hover:rotate-90 duration-300" />
+              Dodaj przestrzeń
+              <ArrowUpRight className="h-4 w-4 ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-1 group-hover:translate-x-0" />
+            </Button>
+            
+            <Button
+              variant="outline"
+              size="lg"
+              className="group"
+            >
+              Eksploruj
+              <ArrowUpRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 duration-300" />
+            </Button>
+          </div>
         </div>
-        <Button
-          variant="gianni"
-          size="sm"
-          className="absolute bottom-6 right-6"
-        >
-          <Plus className="h-4 w-4 mr-2" />
-          Dodaj przestrzeń
-        </Button>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in-delay-3">
+          <div className="w-px h-12 bg-gradient-to-b from-gianni-orange to-transparent animate-pulse" />
+        </div>
       </div>
 
-      <div className="container mx-auto px-6 py-8 space-y-8">
+      <div className="container mx-auto px-6 py-16 space-y-24">
         {/* Morning Briefing */}
-        <MorningBriefing />
+        <div className="opacity-0 animate-fade-in-delay-1">
+          <MorningBriefing />
+        </div>
 
         {/* Quick Stats */}
-        <QuickStats />
+        <div className="opacity-0 animate-fade-in-delay-2">
+          <QuickStats />
+        </div>
 
         {/* Life Spaces Grid */}
-        <div>
-          <h2 className="text-2xl font-semibold text-gianni-text-primary mb-6">
-            Przestrzenie życia
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="opacity-0 animate-fade-in-delay-3">
+          <div className="text-center mb-16">
+            <h2 className="text-display-sm font-helvetica font-light text-gianni-text-primary mb-4 tracking-tight">
+              Przestrzenie życia
+            </h2>
+            <p className="text-lg text-gianni-text-secondary font-light max-w-2xl mx-auto">
+              Odkryj i zarządzaj wszystkimi aspektami swojego życia w jednym miejscu
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {lifeSpaces.map((space, index) => (
-              <LifeSpaceCard
+              <div
                 key={space.title}
-                {...space}
-                className="animate-slide-up"
-                onClick={() => console.log(`Opening ${space.title}`)}
-              />
+                className="opacity-0"
+                style={{ 
+                  animation: `slideUp 0.8s var(--ease-spring) ${0.4 + index * 0.1}s forwards`
+                }}
+              >
+                <LifeSpaceCard
+                  {...space}
+                  onClick={() => console.log(`Opening ${space.title}`)}
+                />
+              </div>
             ))}
           </div>
         </div>
 
         {/* Quick Entry */}
-        <QuickEntry />
+        <div className="opacity-0 animate-slide-up-delay-3">
+          <QuickEntry />
+        </div>
 
-        {/* Footer */}
-        <div className="text-center py-8 border-t border-border/30">
-          <p className="text-gianni-text-secondary text-sm">
+        {/* Sophisticated Footer */}
+        <div className="text-center py-16 border-t border-border/20 opacity-0 animate-fade-in-delay-3">
+          <p className="text-gianni-text-tertiary text-sm font-helvetica font-light">
             Wykonane z ❤️ dla osobistego rozwoju
           </p>
         </div>

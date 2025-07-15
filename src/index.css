@@ -2,64 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Gianni Design System - Dark Theme with Orange Accents */
+/* Gianni Design System - Sophisticated Dark Theme */
 
 @layer base {
   :root {
-    /* Dark theme colors */
-    --background: 0 0% 7%; /* #121212 */
-    --foreground: 0 0% 95%;
+    /* Refined dark theme - warmer, richer tones */
+    --background: 0 0% 6%; /* Deeper black #0F0F0F */
+    --foreground: 0 0% 96%;
 
-    --card: 0 0% 9%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 8%; /* Slightly warmer card background */
+    --card-foreground: 0 0% 96%;
 
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 96%;
 
-    /* Orange accent system */
-    --primary: 28 100% 50%; /* #FF7A00 */
-    --primary-foreground: 0 0% 7%;
+    /* Refined orange system with more nuance */
+    --primary: 28 100% 55%; /* Slightly brighter orange */
+    --primary-foreground: 0 0% 6%;
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 85%;
+    --secondary: 0 0% 12%; /* Warmer secondary */
+    --secondary-foreground: 0 0% 88%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 28 100% 50%; /* Orange accent */
-    --accent-foreground: 0 0% 7%;
+    --accent: 28 100% 55%;
+    --accent-foreground: 0 0% 6%;
 
     --destructive: 0 75% 60%;
-    --destructive-foreground: 0 0% 95%;
+    --destructive-foreground: 0 0% 96%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 28 100% 50%;
+    --border: 0 0% 18%; /* Softer borders */
+    --input: 0 0% 12%;
+    --ring: 28 100% 55%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem; /* Slightly larger radius for premium feel */
 
-    /* Custom Gianni colors */
-    --gianni-orange: 28 100% 50%; /* #FF7A00 */
-    --gianni-orange-glow: 28 100% 60%;
-    --gianni-dark: 0 0% 7%; /* #121212 */
-    --gianni-card: 0 0% 9%;
-    --gianni-card-hover: 0 0% 12%;
-    --gianni-text-primary: 0 0% 95%;
-    --gianni-text-secondary: 0 0% 70%;
+    /* Sophisticated Gianni colors */
+    --gianni-orange: 28 100% 55%; /* #FF8000 - richer orange */
+    --gianni-orange-glow: 28 100% 65%;
+    --gianni-orange-soft: 28 80% 50%;
+    --gianni-dark: 0 0% 6%;
+    --gianni-card: 0 0% 8%;
+    --gianni-card-hover: 0 0% 11%;
+    --gianni-card-elevated: 0 0% 10%;
+    --gianni-text-primary: 0 0% 96%;
+    --gianni-text-secondary: 0 0% 75%;
+    --gianni-text-tertiary: 0 0% 55%;
 
-    /* Gradients */
+    /* Glass morphism */
+    --glass-white: 0 0% 100% / 0.05;
+    --glass-orange: 28 100% 55% / 0.1;
+    --glass-border: 0 0% 100% / 0.08;
+
+    /* Advanced gradients */
     --gradient-orange: linear-gradient(135deg, hsl(var(--gianni-orange)), hsl(var(--gianni-orange-glow)));
+    --gradient-orange-soft: linear-gradient(135deg, hsl(var(--gianni-orange-soft)), hsl(var(--gianni-orange)));
     --gradient-dark: linear-gradient(180deg, hsl(var(--gianni-card)), hsl(var(--gianni-dark)));
-    --gradient-glow: radial-gradient(circle at center, hsl(var(--gianni-orange) / 0.1), transparent 70%);
+    --gradient-glow: radial-gradient(circle at center, hsl(var(--gianni-orange) / 0.15), transparent 70%);
+    --gradient-mesh: radial-gradient(at 40% 20%, hsl(var(--gianni-orange) / 0.3) 0px, transparent 50%), 
+                     radial-gradient(at 80% 0%, hsl(var(--gianni-orange-glow) / 0.2) 0px, transparent 50%), 
+                     radial-gradient(at 0% 50%, hsl(var(--gianni-orange) / 0.1) 0px, transparent 50%);
 
-    /* Shadows */
-    --shadow-orange: 0 4px 20px hsl(var(--gianni-orange) / 0.3);
-    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
-    --shadow-glow: 0 0 30px hsl(var(--gianni-orange) / 0.4);
+    /* Sophisticated shadows */
+    --shadow-orange: 0 8px 32px hsl(var(--gianni-orange) / 0.25);
+    --shadow-orange-glow: 0 0 40px hsl(var(--gianni-orange) / 0.4);
+    --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.12), 0 2px 6px hsl(0 0% 0% / 0.08);
+    --shadow-card-hover: 0 12px 48px hsl(0 0% 0% / 0.18), 0 4px 12px hsl(0 0% 0% / 0.12);
+    --shadow-glass: inset 0 1px 0 hsl(var(--glass-border)), 0 1px 3px hsl(0 0% 0% / 0.1);
 
-    /* Animations */
-    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* Apple-inspired easing curves */
+    --ease-apple: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-spring: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-gentle: cubic-bezier(0.25, 0.1, 0.25, 1);
 
     --sidebar-background: 0 0% 98%;
 

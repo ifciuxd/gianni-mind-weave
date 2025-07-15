@@ -5,28 +5,29 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-helvetica font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98]",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 ease-spring",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-all duration-300",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border border-border/50 bg-transparent hover:bg-glass-white hover:border-gianni-orange/50 hover:text-gianni-orange transition-all duration-300 ease-apple",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        gianni: "bg-gianni-orange text-gianni-dark hover:bg-gianni-orange-glow hover:scale-[1.03] hover:shadow-orange transition-all duration-200",
-        "gianni-outline": "border border-gianni-orange text-gianni-orange bg-transparent hover:bg-gianni-orange hover:text-gianni-dark hover:scale-[1.03] hover:shadow-orange transition-all duration-200",
-        "gianni-ghost": "text-gianni-orange hover:bg-gianni-orange/10 hover:scale-[1.02] transition-all duration-200",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all duration-300",
+        ghost: "hover:bg-glass-white hover:text-gianni-orange transition-all duration-300 ease-apple",
+        link: "text-gianni-orange underline-offset-4 hover:underline hover:text-gianni-orange-glow transition-colors duration-300",
+        gianni: "bg-gradient-orange text-gianni-dark hover:bg-gradient-orange-soft hover:scale-[1.05] hover:shadow-orange-glow transition-all duration-400 ease-spring font-medium",
+        "gianni-outline": "border border-gianni-orange/50 text-gianni-orange bg-transparent hover:bg-gianni-orange hover:text-gianni-dark hover:scale-[1.05] hover:shadow-orange transition-all duration-400 ease-spring",
+        "gianni-ghost": "text-gianni-orange hover:bg-glass-orange hover:scale-[1.02] transition-all duration-300 ease-apple",
+        "gianni-premium": "bg-glass-white backdrop-blur-sm border border-glass-border text-gianni-text-primary hover:bg-gianni-orange hover:text-gianni-dark hover:scale-[1.05] hover:shadow-orange-glow transition-all duration-500 ease-spring",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
+        default: "h-11 px-6 py-2.5",
+        sm: "h-9 rounded-lg px-4 text-xs",
+        lg: "h-13 rounded-2xl px-10 text-base",
+        icon: "h-11 w-11",
       },
     },
     defaultVariants: {
