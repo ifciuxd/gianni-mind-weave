@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Calendar, CloudSun, Target } from "lucide-react";
+import { getPersonalizedMessage } from "@/lib/greetings";
 
 export function MorningBriefing() {
   const currentTime = new Date().toLocaleTimeString("pl-PL", { 
@@ -36,7 +37,7 @@ export function MorningBriefing() {
           </div>
           <div>
             <h2 className="text-xl font-semibold text-gianni-text-primary">
-              Dzień dobry, Gianni!
+              {getPersonalizedMessage()}
             </h2>
             <p className="text-gianni-text-secondary text-sm">
               {currentDate} • {currentTime}

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Plus, Search, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getTimeBasedGreeting } from "@/lib/greetings";
 
 export function FloatingNav() {
   return (
@@ -8,7 +9,7 @@ export function FloatingNav() {
       <div className="bg-glass-white backdrop-blur-xl border border-glass-border rounded-2xl px-6 py-3 shadow-glass">
         <div className="flex items-center gap-4">
           <div className="text-gianni-text-primary font-helvetica font-medium text-sm">
-            Gianni
+            Filip
           </div>
           
           <div className="w-px h-4 bg-glass-border" />

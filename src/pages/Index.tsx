@@ -6,8 +6,11 @@ import { QuickEntry } from "@/components/dashboard/QuickEntry";
 import { Button } from "@/components/ui/button";
 import { FloatingNav } from "@/components/ui/floating-nav";
 import { KineticTitle } from "@/components/ui/kinetic-title";
+import { getTimeBasedGreeting, getTimeBasedSubtitle } from "@/lib/greetings";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
   const lifeSpaces = [
     {
       title: "Znajomi",
@@ -63,8 +66,8 @@ const Index = () => {
         {/* Hero content */}
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
           <KineticTitle 
-            text="Gianni"
-            subtitle="Twój personalny Second Brain"
+            text={getTimeBasedGreeting()}
+            subtitle={getTimeBasedSubtitle()}
             className="mb-12"
           />
           
@@ -123,7 +126,16 @@ const Index = () => {
               <LifeSpaceCard
                 key={space.title}
                 {...space}
-                onClick={() => console.log(`Opening ${space.title}`)}
+                onClick={() => {
+                  const routes: { [key: string]: string } = {
+                    'Znajomi': '/spaces/friends',
+                    'Uczelnia': '/spaces/university', 
+                    'Praca': '/spaces/work',
+                    'Ambicje': '/spaces/ambitions',
+                    'Zdrowie & Sport': '/spaces/health'
+                  };
+                  navigate(routes[space.title] || '/');
+                }}
               />
             ))}
           </div>
@@ -134,12 +146,6 @@ const Index = () => {
           <QuickEntry />
         </div>
 
-        {/* Sophisticated Footer */}
-        <div className="text-center py-16 border-t border-border/20">
-          <p className="text-gianni-text-tertiary text-sm font-helvetica font-light">
-            Wykonane z ❤️ dla osobistego rozwoju
-          </p>
-        </div>
       </div>
     </div>
   );
