@@ -1,4 +1,4 @@
-import { Users, GraduationCap, Briefcase, Target, Heart, Plus, ArrowUpRight } from "lucide-react";
+import { Users, GraduationCap, Briefcase, Target, Heart, Plus, ArrowUpRight, DollarSign, Calendar, BarChart } from "lucide-react";
 import { LifeSpaceCard } from "@/components/dashboard/LifeSpaceCard";
 import { MorningBriefing } from "@/components/dashboard/MorningBriefing";
 import { QuickStats } from "@/components/dashboard/QuickStats";
@@ -12,6 +12,13 @@ import { useNavigate } from "react-router-dom";
 const Index = () => {
   const navigate = useNavigate();
   const lifeSpaces = [
+    {
+      title: "Finanse",
+      description: "Budżet, wydatki, inwestycje i planowanie finansowe",
+      icon: DollarSign,
+      notificationCount: 8,
+      color: "bg-emerald-500/20 text-emerald-400",
+    },
     {
       title: "Znajomi",
       description: "Relacje, spotkania i wspólne plany z najbliższymi osobami",
@@ -76,9 +83,10 @@ const Index = () => {
               variant="gianni-premium"
               size="lg"
               className="group"
+              onClick={() => navigate('/dashboard')}
             >
-              <Plus className="h-5 w-5 mr-2 transition-transform group-hover:rotate-90 duration-300" />
-              Dodaj przestrzeń
+              <BarChart className="h-5 w-5 mr-2 transition-transform group-hover:scale-110 duration-300" />
+              Dashboard
               <ArrowUpRight className="h-4 w-4 ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-1 group-hover:translate-x-0" />
             </Button>
             
@@ -86,8 +94,10 @@ const Index = () => {
               variant="outline"
               size="lg"
               className="group"
+              onClick={() => navigate('/calendar')}
             >
-              Eksploruj
+              <Calendar className="h-5 w-5 mr-2 transition-transform group-hover:scale-110 duration-300" />
+              Kalendarz
               <ArrowUpRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 duration-300" />
             </Button>
           </div>
@@ -128,6 +138,7 @@ const Index = () => {
                 {...space}
                 onClick={() => {
                   const routes: { [key: string]: string } = {
+                    'Finanse': '/spaces/finances',
                     'Znajomi': '/spaces/friends',
                     'Uczelnia': '/spaces/university', 
                     'Praca': '/spaces/work',
