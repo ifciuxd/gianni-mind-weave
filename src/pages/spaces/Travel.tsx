@@ -76,8 +76,8 @@ export const Travel = () => {
           <Card className="bg-gianni-card border-border">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-500/20 rounded-lg">
-                  <MapPin className="h-5 w-5 text-blue-400" />
+                        <div className="p-2 bg-green-600/20 rounded-lg">
+          <MapPin className="h-5 w-5 text-green-600" />
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-gianni-text-primary">{travelStats.countriesVisited}</p>

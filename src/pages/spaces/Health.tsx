@@ -39,7 +39,7 @@ export default function Health() {
       target: 10000,
       unit: "kroków",
       icon: Activity,
-      color: "text-blue-400"
+      color: "text-green-600"
     },
     {
       name: "Woda",

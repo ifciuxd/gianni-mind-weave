@@ -23,7 +23,7 @@ const Index = () => {
       description: "Relacje, spotkania i wspólne plany z najbliższymi osobami",
       icon: Users,
       notificationCount: 3,
-      color: "bg-blue-500/20 text-blue-400",
+      color: "bg-green-600/20 text-green-600",
     },
     {
       title: "Uczelnia",

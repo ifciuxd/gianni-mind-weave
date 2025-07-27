@@ -49,7 +49,7 @@ export const Hobby = () => {
       weeklyGoal: 10,
       weeklyProgress: 7.5,
       icon: Music,
-      color: 'bg-blue-500'
+      color: 'bg-green-600'
     },
     {
       id: '2',
@@ -164,7 +164,7 @@ export const Hobby = () => {
   const getSkillLevelColor = (level: string) => {
     const colors = {
       beginner: 'bg-yellow-500',
-      intermediate: 'bg-blue-500',
+      intermediate: 'bg-green-600',
       advanced: 'bg-purple-500',
       expert: 'bg-green-500'
     };

@@ -45,7 +45,7 @@ const Calendar = () => {
       date: "2024-01-16",
       type: "friends",
       location: "Cinema City",
-      color: "bg-blue-500/20 text-blue-400 border-blue-500/30"
+      color: "bg-green-600/20 text-green-600 border-green-600/30"
     },
     {
       id: 5,
