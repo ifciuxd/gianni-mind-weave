@@ -1,9 +1,12 @@
-import { Users, Plus, Calendar, MessageCircle, Gift, Phone } from "lucide-react";
+import { Users, Plus, Calendar, MessageCircle, Gift, Phone, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export default function Friends() {
+  const navigate = useNavigate();
+  
   const friends = [
     {
       name: "Michał",
@@ -36,6 +39,19 @@ export default function Friends() {
       <div className="container mx-auto px-6 py-8">
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate(-1)}
+              className="hover:bg-glass-orange hover:text-gianni-orange transition-all duration-300"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <div className="p-2 bg-blue-500/20 rounded-lg">
+              <Users className="h-6 w-6 text-blue-400" />
+            </div>
+            <h1 className="text-3xl font-light text-gianni-text-primary">Znajomi</h1>
+          </div>
             <div className="p-2 bg-blue-500/20 rounded-lg">
               <Users className="h-6 w-6 text-blue-400" />
             </div>
