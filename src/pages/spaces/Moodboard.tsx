@@ -7,7 +7,7 @@ import {
   Plus, 
   Image, 
   Type, 
-  Sticky, 
+  StickyNote,
   Download, 
   Share2, 
   Palette,
@@ -26,7 +26,7 @@ const Moodboard = () => {
     { id: "select", icon: Move, label: "Wybierz" },
     { id: "image", icon: Image, label: "Obrazek" },
     { id: "text", icon: Type, label: "Tekst" },
-    { id: "note", icon: Sticky, label: "Notatka" },
+    { id: "note", icon: StickyNote, label: "Notatka" },
   ];
 
   const templates = [

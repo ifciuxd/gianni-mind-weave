@@ -324,7 +324,7 @@ const Calendar = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 

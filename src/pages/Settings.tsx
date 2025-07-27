@@ -11,7 +11,7 @@ import {
   Bell, 
   Palette, 
   Shield, 
-  Sync, 
+  RefreshCw, 
   Download, 
   Trash2, 
   Globe,
@@ -150,7 +150,7 @@ const Settings = () => {
           <Card className="bg-gianni-card border-border">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-gianni-text-primary">
-                <Sync className="h-5 w-5" />
+                <RefreshCw className="h-5 w-5" />
                 Integracje i synchronizacja
               </CardTitle>
               <CardDescription>
