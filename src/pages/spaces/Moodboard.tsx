@@ -186,11 +186,11 @@ const Moodboard = () => {
 
           {/* Canvas */}
           <div 
-            className="w-full h-full bg-white relative"
+            className="w-full h-full bg-gianni-card relative"
             style={{ 
               transform: `scale(${zoom / 100})`,
               transformOrigin: 'center center',
-              backgroundImage: 'radial-gradient(circle, #e5e7eb 1px, transparent 1px)',
+              backgroundImage: 'radial-gradient(circle, hsl(var(--border)) 1px, transparent 1px)',
               backgroundSize: '20px 20px'
             }}
           >
@@ -208,14 +208,14 @@ const Moodboard = () => {
                 }}
               >
                 {element.type === "image" && (
-                  <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center text-6xl">
+                  <div className="w-full h-full bg-gianni-card-elevated rounded-lg flex items-center justify-center text-6xl">
                     {element.content}
                   </div>
                 )}
                 
                 {element.type === "text" && (
                   <div 
-                    className="text-gray-800 font-medium whitespace-nowrap"
+                    className="text-gianni-text-primary font-medium whitespace-nowrap"
                     style={{ fontSize: element.fontSize }}
                   >
                     {element.content}
@@ -224,7 +224,7 @@ const Moodboard = () => {
                 
                 {element.type === "note" && (
                   <div className={`${element.color} p-3 rounded-lg shadow-sm max-w-48`}>
-                    <p className="text-sm text-gray-800">{element.content}</p>
+                    <p className="text-sm text-gianni-text-primary">{element.content}</p>
                   </div>
                 )}
               </div>
@@ -232,7 +232,7 @@ const Moodboard = () => {
 
             {/* Empty State Hint */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="text-center text-gray-400">
+              <div className="text-center text-gianni-text-tertiary">
                 <div className="text-6xl mb-4">✨</div>
                 <p className="text-lg">Twój kreatywny moodboard</p>
                 <p className="text-sm">Dodaj obrazy, tekst i notatki, aby stworzyć inspirującą kompozycję</p>
