@@ -38,10 +38,10 @@
 
     --radius: 0.875rem; /* Slightly larger radius for premium feel */
 
-    /* Sophisticated Gianni colors - Fixed to more pleasant blue-orange */
-    --gianni-orange: 213 88% 60%; /* More pleasant blue-orange #4FA8FF */
-    --gianni-orange-glow: 213 90% 70%;
-    --gianni-orange-soft: 213 80% 55%;
+    /* Sophisticated Gianni colors - Bottle Green */
+    --gianni-orange: 152 25% 35%; /* Bottle Green */
+    --gianni-orange-glow: 152 30% 40%;
+    --gianni-orange-soft: 152 20% 30%;
     --gianni-dark: 0 0% 6%;
     --gianni-card: 0 0% 8%;
     --gianni-card-hover: 0 0% 11%;

@@ -47,8 +47,8 @@ export default function Friends() {
             >
               <ArrowLeft className="h-5 w-5" />
             </Button>
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <Users className="h-6 w-6 text-blue-400" />
+            <div className="p-2 bg-gianni-orange/20 rounded-lg">
+              <Users className="h-6 w-6 text-gianni-orange" />
             </div>
             <h1 className="text-3xl font-light text-gianni-text-primary">Znajomi</h1>
           </div>
