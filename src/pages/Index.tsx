@@ -1,8 +1,7 @@
-import { Users, GraduationCap, Briefcase, Target, Heart, Plus, ArrowUpRight, DollarSign, Calendar, BarChart } from "lucide-react";
+import { Users, GraduationCap, Briefcase, Target, Heart, Plus, ArrowUpRight, DollarSign, Calendar, BarChart, Plane, Palette, FileText } from "lucide-react";
 import { LifeSpaceCard } from "@/components/dashboard/LifeSpaceCard";
-import { MorningBriefing } from "@/components/dashboard/MorningBriefing";
+import { UnifiedDailySummary } from "@/components/dashboard/UnifiedDailySummary";
 import { QuickStats } from "@/components/dashboard/QuickStats";
-import { QuickEntry } from "@/components/dashboard/QuickEntry";
 import { Button } from "@/components/ui/button";
 import { FloatingNav } from "@/components/ui/floating-nav";
 import { KineticTitle } from "@/components/ui/kinetic-title";
@@ -53,6 +52,27 @@ const Index = () => {
       icon: Heart,
       notificationCount: 1,
       color: "bg-red-500/20 text-red-400",
+    },
+    {
+      title: "Podróże",
+      description: "Planowanie wyjazdów, budżet podróży i wspomnienia",
+      icon: Plane,
+      notificationCount: 4,
+      color: "bg-cyan-500/20 text-cyan-400",
+    },
+    {
+      title: "Moodboard",
+      description: "Kreatywna przestrzeń wizualna i inspiracje",
+      icon: Palette,
+      notificationCount: 0,
+      color: "bg-pink-500/20 text-pink-400",
+    },
+    {
+      title: "Notatki",
+      description: "Wszystkie notatki, pomysły i szybkie zapiski",
+      icon: FileText,
+      notificationCount: 6,
+      color: "bg-indigo-500/20 text-indigo-400",
     },
   ];
 
@@ -110,9 +130,9 @@ const Index = () => {
       </div>
 
       <div className="container mx-auto px-6 py-16 space-y-24">
-        {/* Morning Briefing */}
+        {/* Unified Daily Summary */}
         <div>
-          <MorningBriefing />
+          <UnifiedDailySummary />
         </div>
 
         {/* Quick Stats */}
@@ -143,18 +163,16 @@ const Index = () => {
                     'Uczelnia': '/spaces/university', 
                     'Praca': '/spaces/work',
                     'Ambicje': '/spaces/ambitions',
-                    'Zdrowie & Sport': '/spaces/health'
+                    'Zdrowie & Sport': '/spaces/health',
+                    'Podróże': '/spaces/travel',
+                    'Moodboard': '/spaces/moodboard',
+                    'Notatki': '/spaces/notes'
                   };
                   navigate(routes[space.title] || '/');
                 }}
               />
             ))}
           </div>
-        </div>
-
-        {/* Quick Entry */}
-        <div>
-          <QuickEntry />
         </div>
 
       </div>
