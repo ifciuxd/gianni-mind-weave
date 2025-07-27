@@ -80,7 +80,7 @@ export function UnifiedDailySummary() {
               { label: "Budżet", value: dailyMetrics.budgetUsage, icon: DollarSign, color: "text-emerald-300" },
             ].map((metric) => (
               <div key={metric.label} className="text-center">
-                <div className="flex items-center justify-center mb-2">
+                <div className="flex items-center justify-center mb-2 opacity-70 hover:opacity-100 transition-opacity duration-300">
                   <metric.icon className={`h-4 w-4 ${metric.color}`} />
                 </div>
                 <div className="text-2xl font-bold text-white mb-1">
