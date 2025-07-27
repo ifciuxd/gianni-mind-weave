@@ -69,7 +69,7 @@ const Finances = () => {
           date: formData.date,
           recurring: formData.recurring,
           recurring_period: formData.recurring ? formData.recurring_period : null,
-          user_id: '00000000-0000-0000-0000-000000000000' // TODO: Replace with actual auth user ID
+          user_id: (await supabase.auth.getUser()).data.user?.id
         }]);
 
       if (error) throw error;
