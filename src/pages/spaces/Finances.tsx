@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/api/client";
 import { useNavigate } from "react-router-dom";
 import { DollarSign, TrendingUp, TrendingDown, Target, CreditCard, PiggyBank, Receipt, BarChart3, Calendar, Plus, ArrowUpRight, Home, Car, Utensils, Heart, ShoppingCart, X, ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
