@@ -17,6 +17,7 @@ import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Resp
 
 const Finances = () => {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isAllTransactionsOpen, setIsAllTransactionsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
@@ -546,10 +547,46 @@ const Finances = () => {
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full mt-6">
-              Zobacz wszystkie transakcje
-              <ArrowUpRight className="h-4 w-4 ml-2" />
-            </Button>
+            <Dialog open={isAllTransactionsOpen} onOpenChange={setIsAllTransactionsOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" className="w-full mt-6">
+                  Zobacz wszystkie transakcje
+                  <ArrowUpRight className="h-4 w-4 ml-2" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="bg-gianni-surface border-border max-w-4xl max-h-[80vh] overflow-hidden">
+                <DialogHeader>
+                  <DialogTitle className="text-gianni-text-primary">Wszystkie transakcje</DialogTitle>
+                </DialogHeader>
+                
+                <div className="space-y-4 overflow-y-auto max-h-[60vh]">
+                  {[...recentTransactions, ...recentTransactions.map(t => ({...t, id: t.id + 10, date: "2024-01-12"}))].map((transaction) => (
+                    <div key={transaction.id} className="flex items-center justify-between p-4 rounded-lg bg-gianni-card border border-border hover:bg-gianni-card-hover transition-colors">
+                      <div className="flex items-center space-x-4">
+                        <div className={`h-10 w-10 rounded-full flex items-center justify-center ${
+                          transaction.amount > 0 ? 'bg-emerald-500/20' : 'bg-red-500/20'
+                        }`}>
+                          {transaction.amount > 0 ? (
+                            <TrendingUp className="h-5 w-5 text-emerald-400" />
+                          ) : (
+                            <CreditCard className="h-5 w-5 text-red-400" />
+                          )}
+                        </div>
+                        <div>
+                          <p className="text-gianni-text-primary font-medium">{transaction.description}</p>
+                          <p className="text-sm text-gianni-text-secondary">{transaction.category} • {transaction.date}</p>
+                        </div>
+                      </div>
+                      <div className={`text-lg font-semibold ${
+                        transaction.amount > 0 ? 'text-emerald-400' : 'text-red-400'
+                      }`}>
+                        {transaction.amount > 0 ? '+' : ''}{transaction.amount.toFixed(2)} zł
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </DialogContent>
+            </Dialog>
           </CardContent>
         </Card>
       </div>
