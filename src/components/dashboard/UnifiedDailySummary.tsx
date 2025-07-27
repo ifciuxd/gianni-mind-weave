@@ -68,23 +68,6 @@ export function UnifiedDailySummary() {
       <Card className="bg-gradient-orange border-border overflow-hidden relative">
         <div className="absolute inset-0 bg-gradient-glow opacity-30" />
         <CardContent className="p-8 relative z-10">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 className="text-3xl font-helvetica font-light text-white mb-2">
-                {getTimeBasedGreeting()}, Filip
-              </h2>
-              <p className="text-white/80">
-                {currentDate} • {currentTime}
-              </p>
-            </div>
-            <div className="text-right">
-              <div className="flex items-center gap-2 text-white/90 mb-2">
-                <Sun className="h-5 w-5" />
-                <span>Słoneczny dzień</span>
-              </div>
-              <p className="text-white/70 text-sm">Warszawa, 18°C</p>
-            </div>
-          </div>
           
           {/* Daily metrics */}
           <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
