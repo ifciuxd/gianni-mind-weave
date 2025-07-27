@@ -1,13 +1,87 @@
 import { useState } from "react";
-import { DollarSign, TrendingUp, TrendingDown, Target, CreditCard, PiggyBank, Receipt, BarChart3, Calendar, Plus, ArrowUpRight } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { DollarSign, TrendingUp, TrendingDown, Target, CreditCard, PiggyBank, Receipt, BarChart3, Calendar, Plus, ArrowUpRight, Home, Car, Utensils, Heart, ShoppingCart, X } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { toast } from "sonner";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, ResponsiveContainer } from "recharts";
 
 const Finances = () => {
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    title: '',
+    amount: '',
+    type: 'expense' as 'income' | 'expense',
+    category: '',
+    description: '',
+    date: new Date().toISOString().split('T')[0],
+    recurring: false,
+    recurring_period: ''
+  });
+
+  // Categories with icons
+  const categories = [
+    { id: 'food', name: 'Jedzenie', icon: Utensils, color: 'text-orange-500' },
+    { id: 'housing', name: 'Mieszkanie', icon: Home, color: 'text-blue-500' },
+    { id: 'transport', name: 'Transport', icon: Car, color: 'text-green-500' },
+    { id: 'shopping', name: 'Zakupy', icon: ShoppingCart, color: 'text-purple-500' },
+    { id: 'entertainment', name: 'Rozrywka', icon: Heart, color: 'text-pink-500' },
+    { id: 'income', name: 'Dochód', icon: TrendingUp, color: 'text-emerald-500' }
+  ];
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const amount = parseFloat(formData.amount);
+      const finalAmount = formData.type === 'expense' ? -Math.abs(amount) : Math.abs(amount);
+      
+      const { error } = await supabase
+        .from('finances')
+        .insert([{
+          title: formData.title,
+          amount: finalAmount,
+          type: formData.type,
+          category: formData.category,
+          description: formData.description,
+          date: formData.date,
+          recurring: formData.recurring,
+          recurring_period: formData.recurring ? formData.recurring_period : null,
+          user_id: '00000000-0000-0000-0000-000000000000' // TODO: Replace with actual auth user ID
+        }]);
+
+      if (error) throw error;
+
+      toast.success(`${formData.type === 'expense' ? 'Wydatek' : 'Wpływ'} został dodany!`);
+      setIsAddDialogOpen(false);
+      setFormData({
+        title: '',
+        amount: '',
+        type: 'expense',
+        category: '',
+        description: '',
+        date: new Date().toISOString().split('T')[0],
+        recurring: false,
+        recurring_period: ''
+      });
+    } catch (error) {
+      console.error('Error adding transaction:', error);
+      toast.error('Błąd podczas dodawania transakcji');
+    } finally {
+      setIsLoading(false);
+    }
+  };
   // Mock data for charts
   const expenseData = [
     { month: "Sty", wydatki: 2400, przychód: 3200 },
@@ -73,10 +147,157 @@ const Finances = () => {
                 <Receipt className="h-5 w-5 mr-2" />
                 Skanuj paragon
               </Button>
-              <Button variant="gianni-premium" size="lg">
-                <Plus className="h-5 w-5 mr-2" />
-                Dodaj wydatek
-              </Button>
+              
+              <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="gianni-premium" size="lg">
+                    <Plus className="h-5 w-5 mr-2" />
+                    Dodaj wydatek
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-gianni-surface border-border max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="text-gianni-text-primary">
+                      Dodaj {formData.type === 'expense' ? 'wydatek' : 'wpływ'}
+                    </DialogTitle>
+                  </DialogHeader>
+                  
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* Type Toggle */}
+                    <div className="flex items-center gap-4 p-3 bg-gianni-card rounded-lg border">
+                      <div className="flex items-center space-x-2">
+                        <Switch
+                          checked={formData.type === 'income'}
+                          onCheckedChange={(checked) => setFormData({...formData, type: checked ? 'income' : 'expense'})}
+                        />
+                        <Label className="text-gianni-text-primary">
+                          {formData.type === 'expense' ? '💸 Wydatek' : '💰 Wpływ'}
+                        </Label>
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <div className="space-y-2">
+                      <Label htmlFor="title" className="text-gianni-text-primary">Tytuł</Label>
+                      <Input
+                        id="title"
+                        value={formData.title}
+                        onChange={(e) => setFormData({...formData, title: e.target.value})}
+                        placeholder="Np. Zakupy spożywcze"
+                        className="bg-gianni-card border-border"
+                        required
+                      />
+                    </div>
+
+                    {/* Amount */}
+                    <div className="space-y-2">
+                      <Label htmlFor="amount" className="text-gianni-text-primary">Kwota (zł)</Label>
+                      <Input
+                        id="amount"
+                        type="number"
+                        step="0.01"
+                        value={formData.amount}
+                        onChange={(e) => setFormData({...formData, amount: e.target.value})}
+                        placeholder="0.00"
+                        className="bg-gianni-card border-border"
+                        required
+                      />
+                    </div>
+
+                    {/* Category */}
+                    <div className="space-y-2">
+                      <Label htmlFor="category" className="text-gianni-text-primary">Kategoria</Label>
+                      <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})}>
+                        <SelectTrigger className="bg-gianni-card border-border">
+                          <SelectValue placeholder="Wybierz kategorię" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {categories.map((category) => {
+                            const Icon = category.icon;
+                            return (
+                              <SelectItem key={category.id} value={category.id}>
+                                <div className="flex items-center gap-2">
+                                  <Icon className={`h-4 w-4 ${category.color}`} />
+                                  {category.name}
+                                </div>
+                              </SelectItem>
+                            );
+                          })}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* Date */}
+                    <div className="space-y-2">
+                      <Label htmlFor="date" className="text-gianni-text-primary">Data</Label>
+                      <Input
+                        id="date"
+                        type="date"
+                        value={formData.date}
+                        onChange={(e) => setFormData({...formData, date: e.target.value})}
+                        className="bg-gianni-card border-border"
+                        required
+                      />
+                    </div>
+
+                    {/* Description */}
+                    <div className="space-y-2">
+                      <Label htmlFor="description" className="text-gianni-text-primary">Opis (opcjonalny)</Label>
+                      <Textarea
+                        id="description"
+                        value={formData.description}
+                        onChange={(e) => setFormData({...formData, description: e.target.value})}
+                        placeholder="Dodatkowe informacje..."
+                        className="bg-gianni-card border-border"
+                        rows={3}
+                      />
+                    </div>
+
+                    {/* Recurring */}
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-2">
+                        <Switch
+                          checked={formData.recurring}
+                          onCheckedChange={(checked) => setFormData({...formData, recurring: checked})}
+                        />
+                        <Label className="text-gianni-text-primary">Transakcja cykliczna</Label>
+                      </div>
+
+                      {formData.recurring && (
+                        <Select value={formData.recurring_period} onValueChange={(value) => setFormData({...formData, recurring_period: value})}>
+                          <SelectTrigger className="bg-gianni-card border-border">
+                            <SelectValue placeholder="Wybierz częstotliwość" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="daily">Codziennie</SelectItem>
+                            <SelectItem value="weekly">Tygodniowo</SelectItem>
+                            <SelectItem value="monthly">Miesięcznie</SelectItem>
+                            <SelectItem value="yearly">Rocznie</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    </div>
+
+                    {/* Submit Buttons */}
+                    <div className="flex gap-2 pt-4">
+                      <Button
+                        type="submit"
+                        className="flex-1"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? 'Dodawanie...' : `Dodaj ${formData.type === 'expense' ? 'wydatek' : 'wpływ'}`}
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => setIsAddDialogOpen(false)}
+                      >
+                        Anuluj
+                      </Button>
+                    </div>
+                  </form>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
