@@ -19,6 +19,7 @@ const Finances = () => {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isAllTransactionsOpen, setIsAllTransactionsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isScanningReceipt, setIsScanningReceipt] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     amount: '',
@@ -83,6 +84,79 @@ const Finances = () => {
       setIsLoading(false);
     }
   };
+
+  const handleReceiptScan = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Proszę wybrać plik obrazu');
+      return;
+    }
+
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error('Plik jest za duży. Maksymalny rozmiar to 10MB');
+      return;
+    }
+
+    setIsScanningReceipt(true);
+    
+    try {
+      // Convert file to base64
+      const reader = new FileReader();
+      reader.onload = async () => {
+        try {
+          const base64String = reader.result as string;
+          const base64Data = base64String.split(',')[1]; // Remove data:image/jpeg;base64, prefix
+
+          console.log('Scanning receipt with AI...');
+          const { data, error } = await supabase.functions.invoke('scan-receipt', {
+            body: { imageBase64: base64Data }
+          });
+
+          if (error) throw error;
+          
+          if (data.success) {
+            // Fill the form with extracted data
+            const extractedData = data.data;
+            setFormData({
+              title: extractedData.title || '',
+              amount: extractedData.amount?.toString() || '',
+              type: 'expense', // Receipts are always expenses
+              category: extractedData.category || '',
+              description: extractedData.description || '',
+              date: extractedData.date || new Date().toISOString().split('T')[0],
+              recurring: false,
+              recurring_period: ''
+            });
+            
+            // Open the add dialog with pre-filled data
+            setIsAddDialogOpen(true);
+            
+            toast.success(`Paragon zeskanowany! ${extractedData.store ? `Sklep: ${extractedData.store}` : ''}`);
+          } else {
+            throw new Error(data.error || 'Nie udało się przetworzyć paragonu');
+          }
+        } catch (scanError) {
+          console.error('Error scanning receipt:', scanError);
+          toast.error('Błąd podczas skanowania paragonu. Spróbuj ponownie.');
+        } finally {
+          setIsScanningReceipt(false);
+        }
+      };
+      
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error processing file:', error);
+      toast.error('Błąd podczas przetwarzania pliku');
+      setIsScanningReceipt(false);
+    }
+    
+    // Reset input
+    event.target.value = '';
+  };
   // Mock data for charts
   const expenseData = [
     { month: "Sty", wydatki: 2400, przychód: 3200 },
@@ -144,10 +218,19 @@ const Finances = () => {
               </p>
             </div>
             <div className="flex gap-3">
-              <Button variant="outline" size="lg">
-                <Receipt className="h-5 w-5 mr-2" />
-                Skanuj paragon
-              </Button>
+              <div className="relative">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleReceiptScan}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  disabled={isScanningReceipt}
+                />
+                <Button variant="outline" size="lg" disabled={isScanningReceipt}>
+                  <Receipt className="h-5 w-5 mr-2" />
+                  {isScanningReceipt ? 'Skanowanie...' : 'Skanuj paragon'}
+                </Button>
+              </div>
               
               <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
                 <DialogTrigger asChild>
