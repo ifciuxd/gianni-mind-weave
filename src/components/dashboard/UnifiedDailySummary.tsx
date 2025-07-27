@@ -55,7 +55,7 @@ export function UnifiedDailySummary() {
   ];
 
   const quickStats = [
-    { label: "Zadania dziś", value: "7/12", color: "text-blue-400" },
+    { label: "Zadania dziś", value: "7/12", color: "text-green-600" },
     { label: "Budżet dzienny", value: "67/100zł", color: "text-emerald-400" },
     { label: "Kroki", value: "8.2k", color: "text-purple-400" },
     { label: "Focus time", value: "4.2h", color: "text-orange-400" }
@@ -73,7 +73,7 @@ export function UnifiedDailySummary() {
           <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
             {[
               { label: "Energia", value: dailyMetrics.energy, icon: Battery, color: "text-green-300" },
-              { label: "Focus", value: dailyMetrics.focus, icon: Brain, color: "text-blue-300" },
+              { label: "Focus", value: dailyMetrics.focus, icon: Brain, color: "text-green-500" },
               { label: "Nastrój", value: dailyMetrics.mood, icon: Star, color: "text-yellow-300" },
               { label: "Produktywność", value: dailyMetrics.productivity, icon: TrendingUp, color: "text-purple-300" },
               { label: "Cele", value: dailyMetrics.goalProgress, icon: Target, color: "text-red-300" },
@@ -110,13 +110,13 @@ export function UnifiedDailySummary() {
               <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-gianni-card-hover">
                 <div className={`p-2 rounded-lg ${
                   item.status === 'critical' ? 'bg-red-500/20' :
-                  item.status === 'upcoming' ? 'bg-blue-500/20' :
+                  item.status === 'upcoming' ? 'bg-green-600/20' :
                   item.status === 'pending' ? 'bg-orange-500/20' :
                   'bg-green-500/20'
                 }`}>
                   <item.icon className={`h-4 w-4 ${
                     item.status === 'critical' ? 'text-red-400' :
-                    item.status === 'upcoming' ? 'text-blue-400' :
+                    item.status === 'upcoming' ? 'text-green-600' :
                     item.status === 'pending' ? 'text-orange-400' :
                     'text-green-400'
                   }`} />

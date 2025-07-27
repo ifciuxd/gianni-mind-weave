@@ -65,7 +65,7 @@ export default function Work() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed': return 'bg-green-500/20 text-green-400';
-      case 'in-progress': return 'bg-blue-500/20 text-blue-400';
+      case 'in-progress': return 'bg-green-600/20 text-green-600';
       default: return 'bg-gray-500/20 text-gray-400';
     }
   };

@@ -27,7 +27,7 @@ const Notes = () => {
 
   const categories = [
     { id: "all", name: "Wszystkie", count: 42, color: "bg-gray-500/20" },
-    { id: "work", name: "Praca", count: 15, color: "bg-blue-500/20" },
+    { id: "work", name: "Praca", count: 15, color: "bg-green-600/20" },
     { id: "personal", name: "Osobiste", count: 12, color: "bg-emerald-500/20" },
     { id: "ideas", name: "Pomysły", count: 8, color: "bg-purple-500/20" },
     { id: "travel", name: "Podróże", count: 7, color: "bg-orange-500/20" },

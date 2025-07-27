@@ -22,7 +22,7 @@ export default function University() {
       grade: 4.0,
       progress: 60,
       assignments: 3,
-      color: "bg-blue-500/20 text-blue-400"
+      color: "bg-green-600/20 text-green-600"
     },
     {
       name: "Bazy Danych",

@@ -31,7 +31,7 @@ const Moodboard = () => {
 
   const templates = [
     { name: "Inspiracje designu", items: 12, color: "bg-purple-500/20" },
-    { name: "Podróże 2024", items: 8, color: "bg-blue-500/20" },
+    { name: "Podróże 2024", items: 8, color: "bg-green-600/20" },
     { name: "Projekt mieszkania", items: 15, color: "bg-emerald-500/20" },
     { name: "Mood & Goals", items: 6, color: "bg-orange-500/20" },
   ];
@@ -199,7 +199,7 @@ const Moodboard = () => {
             {canvasElements.map((element) => (
               <div
                 key={element.id}
-                className="absolute border-2 border-transparent hover:border-blue-400 cursor-move"
+                className="absolute border-2 border-transparent hover:border-green-600 cursor-move"
                 style={{
                   left: element.x,
                   top: element.y,
