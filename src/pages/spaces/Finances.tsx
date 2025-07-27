@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { DollarSign, TrendingUp, TrendingDown, Target, CreditCard, PiggyBank, Receipt, BarChart3, Calendar, Plus, ArrowUpRight, Home, Car, Utensils, Heart, ShoppingCart, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { DollarSign, TrendingUp, TrendingDown, Target, CreditCard, PiggyBank, Receipt, BarChart3, Calendar, Plus, ArrowUpRight, Home, Car, Utensils, Heart, ShoppingCart, X, ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -16,6 +17,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, ResponsiveContainer } from "recharts";
 
 const Finances = () => {
+  const navigate = useNavigate();
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isAllTransactionsOpen, setIsAllTransactionsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -209,13 +211,23 @@ const Finances = () => {
       <div className="border-b border-border bg-gianni-card">
         <div className="container mx-auto px-6 py-8">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-light text-gianni-text-primary tracking-tight">
-                Finanse
-              </h1>
-              <p className="text-gianni-text-secondary mt-2">
-                Pełna kontrola nad Twoimi finansami
-              </p>
+            <div className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate(-1)}
+                className="hover:bg-glass-orange hover:text-gianni-orange transition-all duration-300"
+              >
+                <ArrowLeft className="h-5 w-5" />
+              </Button>
+              <div>
+                <h1 className="text-4xl font-light text-gianni-text-primary tracking-tight">
+                  Finanse
+                </h1>
+                <p className="text-gianni-text-secondary mt-2">
+                  Pełna kontrola nad Twoimi finansami
+                </p>
+              </div>
             </div>
             <div className="flex gap-3">
               <div className="relative">
