@@ -52,11 +52,6 @@ export default function Friends() {
             </div>
             <h1 className="text-3xl font-light text-gianni-text-primary">Znajomi</h1>
           </div>
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <Users className="h-6 w-6 text-blue-400" />
-            </div>
-            <h1 className="text-3xl font-light text-gianni-text-primary">Znajomi</h1>
-          </div>
           <p className="text-gianni-text-secondary">Zarządzaj relacjami z najbliższymi osobami</p>
         </div>
 
