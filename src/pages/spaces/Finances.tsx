@@ -19,6 +19,7 @@ import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Resp
 const Finances = () => {
   const navigate = useNavigate();
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isAddGoalDialogOpen, setIsAddGoalDialogOpen] = useState(false);
   const [isAllTransactionsOpen, setIsAllTransactionsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isScanningReceipt, setIsScanningReceipt] = useState(false);
@@ -31,6 +32,12 @@ const Finances = () => {
     date: new Date().toISOString().split('T')[0],
     recurring: false,
     recurring_period: ''
+  });
+  const [goalFormData, setGoalFormData] = useState({
+    name: '',
+    target_amount: '',
+    target_date: '',
+    description: ''
   });
 
   // Categories with icons
@@ -82,6 +89,40 @@ const Finances = () => {
     } catch (error) {
       console.error('Error adding transaction:', error);
       toast.error('Błąd podczas dodawania transakcji');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoalSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      // TODO: Uncomment when savings_goals table types are available
+      // const { error } = await supabase
+      //   .from('savings_goals')
+      //   .insert([{
+      //     name: goalFormData.name,
+      //     target_amount: parseFloat(goalFormData.target_amount),
+      //     target_date: goalFormData.target_date || null,
+      //     description: goalFormData.description,
+      //     user_id: '00000000-0000-0000-0000-000000000000' // TODO: Replace with actual auth user ID
+      //   }]);
+
+      // if (error) throw error;
+
+      toast.success('Cel oszczędnościowy został dodany!');
+      setIsAddGoalDialogOpen(false);
+      setGoalFormData({
+        name: '',
+        target_amount: '',
+        target_date: '',
+        description: ''
+      });
+    } catch (error) {
+      console.error('Error adding savings goal:', error);
+      toast.error('Błąd podczas dodawania celu');
     } finally {
       setIsLoading(false);
     }
@@ -598,7 +639,11 @@ const Finances = () => {
                     </div>
                   </div>
                 ))}
-                <Button variant="outline" className="w-full mt-4">
+                <Button 
+                  variant="outline" 
+                  className="w-full mt-4"
+                  onClick={() => setIsAddGoalDialogOpen(true)}
+                >
                   <Target className="h-4 w-4 mr-2" />
                   Dodaj nowy cel
                 </Button>
@@ -685,6 +730,90 @@ const Finances = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Add Goal Dialog */}
+      <Dialog open={isAddGoalDialogOpen} onOpenChange={setIsAddGoalDialogOpen}>
+        <DialogContent className="bg-gianni-surface border-border max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-gianni-text-primary">
+              Dodaj cel oszczędnościowy
+            </DialogTitle>
+          </DialogHeader>
+          
+          <form onSubmit={handleGoalSubmit} className="space-y-4">
+            {/* Goal Name */}
+            <div className="space-y-2">
+              <Label htmlFor="goalName" className="text-gianni-text-primary">Nazwa celu</Label>
+              <Input
+                id="goalName"
+                value={goalFormData.name}
+                onChange={(e) => setGoalFormData({...goalFormData, name: e.target.value})}
+                placeholder="Np. Nowy laptop"
+                className="bg-gianni-card border-border"
+                required
+              />
+            </div>
+
+            {/* Target Amount */}
+            <div className="space-y-2">
+              <Label htmlFor="targetAmount" className="text-gianni-text-primary">Docelowa kwota (zł)</Label>
+              <Input
+                id="targetAmount"
+                type="number"
+                step="0.01"
+                value={goalFormData.target_amount}
+                onChange={(e) => setGoalFormData({...goalFormData, target_amount: e.target.value})}
+                placeholder="0.00"
+                className="bg-gianni-card border-border"
+                required
+              />
+            </div>
+
+            {/* Target Date */}
+            <div className="space-y-2">
+              <Label htmlFor="targetDate" className="text-gianni-text-primary">Data docelowa (opcjonalnie)</Label>
+              <Input
+                id="targetDate"
+                type="date"
+                value={goalFormData.target_date}
+                onChange={(e) => setGoalFormData({...goalFormData, target_date: e.target.value})}
+                className="bg-gianni-card border-border"
+              />
+            </div>
+
+            {/* Description */}
+            <div className="space-y-2">
+              <Label htmlFor="goalDescription" className="text-gianni-text-primary">Opis (opcjonalny)</Label>
+              <Textarea
+                id="goalDescription"
+                value={goalFormData.description}
+                onChange={(e) => setGoalFormData({...goalFormData, description: e.target.value})}
+                placeholder="Na co oszczędzasz..."
+                className="bg-gianni-card border-border"
+                rows={3}
+              />
+            </div>
+
+            {/* Submit Buttons */}
+            <div className="flex gap-2 pt-4">
+              <Button
+                type="submit"
+                className="flex-1"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Dodawanie...' : 'Dodaj cel'}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsAddGoalDialogOpen(false)}
+              >
+                Anuluj
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
