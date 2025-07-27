@@ -1,4 +1,4 @@
-import { Users, GraduationCap, Briefcase, Target, Heart, Plus, ArrowUpRight, DollarSign, Calendar, BarChart, Plane, Palette, FileText } from "lucide-react";
+import { Users, GraduationCap, Briefcase, Target, Heart, Plus, ArrowUpRight, DollarSign, Calendar, BarChart, Plane, Palette, FileText, Shirt, Coffee } from "lucide-react";
 import { LifeSpaceCard } from "@/components/dashboard/LifeSpaceCard";
 import { UnifiedDailySummary } from "@/components/dashboard/UnifiedDailySummary";
 import { QuickStats } from "@/components/dashboard/QuickStats";
@@ -73,6 +73,20 @@ const Index = () => {
       icon: FileText,
       notificationCount: 6,
       color: "bg-indigo-500/20 text-indigo-400",
+    },
+    {
+      title: "Szafa",
+      description: "Organizacja garderoby i stylizacje",
+      icon: Shirt,
+      notificationCount: 2,
+      color: "bg-pink-500/20 text-pink-400",
+    },
+    {
+      title: "Hobby",
+      description: "Śledzenie pasji i zainteresowań",
+      icon: Coffee,
+      notificationCount: 1,
+      color: "bg-amber-500/20 text-amber-400",
     },
   ];
 
@@ -166,7 +180,9 @@ const Index = () => {
                     'Zdrowie & Sport': '/spaces/health',
                     'Podróże': '/spaces/travel',
                     'Moodboard': '/spaces/moodboard',
-                    'Notatki': '/spaces/notes'
+                    'Notatki': '/spaces/notes',
+                    'Szafa': '/spaces/wardrobe',
+                    'Hobby': '/spaces/hobby'
                   };
                   navigate(routes[space.title] || '/');
                 }}

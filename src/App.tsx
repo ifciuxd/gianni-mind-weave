@@ -11,9 +11,11 @@ import Work from "./pages/spaces/Work";
 import Ambitions from "./pages/spaces/Ambitions";
 import Health from "./pages/spaces/Health";
 import Finances from "./pages/spaces/Finances";
-import Travel from "./pages/spaces/Travel";
-import Moodboard from "./pages/spaces/Moodboard";
-import Notes from "./pages/spaces/Notes";
+import { Travel } from './pages/spaces/Travel';
+import Moodboard from './pages/spaces/Moodboard';
+import Notes from './pages/spaces/Notes';
+import { Wardrobe } from './pages/spaces/Wardrobe';
+import { Hobby } from './pages/spaces/Hobby';
 import Calendar from "./pages/Calendar";
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
@@ -39,6 +41,8 @@ const App = () => (
           <Route path="/spaces/travel" element={<Travel />} />
           <Route path="/spaces/moodboard" element={<Moodboard />} />
           <Route path="/spaces/notes" element={<Notes />} />
+          <Route path="/spaces/wardrobe" element={<Wardrobe />} />
+          <Route path="/spaces/hobby" element={<Hobby />} />
           <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

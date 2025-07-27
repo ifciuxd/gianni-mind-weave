@@ -2,8 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Plus, Search, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getTimeBasedGreeting } from "@/lib/greetings";
+import { useNavigate } from "react-router-dom";
 
 export function FloatingNav() {
+  const navigate = useNavigate();
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
       <div className="bg-glass-white backdrop-blur-xl border border-glass-border rounded-2xl px-6 py-3 shadow-glass">
@@ -19,6 +21,7 @@ export function FloatingNav() {
               variant="ghost"
               size="sm"
               className="h-8 w-8 p-0 hover:bg-glass-orange hover:text-gianni-orange transition-all duration-300"
+              onClick={() => {/* TODO: Implement global search */}}
             >
               <Search className="h-4 w-4" />
             </Button>
@@ -27,6 +30,7 @@ export function FloatingNav() {
               variant="ghost"
               size="sm"
               className="h-8 w-8 p-0 hover:bg-glass-orange hover:text-gianni-orange transition-all duration-300"
+              onClick={() => {/* TODO: Implement quick add */}}
             >
               <Plus className="h-4 w-4" />
             </Button>
@@ -35,6 +39,7 @@ export function FloatingNav() {
               variant="ghost"
               size="sm"
               className="h-8 w-8 p-0 hover:bg-glass-orange hover:text-gianni-orange transition-all duration-300"
+              onClick={() => navigate('/settings')}
             >
               <Settings className="h-4 w-4" />
             </Button>

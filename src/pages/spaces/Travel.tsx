@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TravelMap } from "@/components/ui/map";
 import { 
   Plane, 
   MapPin, 
@@ -18,25 +19,37 @@ import {
   Map
 } from "lucide-react";
 
-const Travel = () => {
+export const Travel = () => {
   const upcomingTrips = [
     {
-      id: 1,
-      destination: "Barcelona, Hiszpania",
-      dates: "15-22 Marzec 2024",
-      budget: { spent: 1200, total: 2000 },
-      status: "planned",
-      image: "/placeholder.svg",
-      days: 7
+      id: '1',
+      title: 'Wakacje w Barcelonie',
+      destination: 'Barcelona, Hiszpania',
+      dates: '15-22 marca 2024',
+      budget: '3500 zł',
+      status: 'booked',
+      latitude: 41.3851,
+      longitude: 2.1734
     },
     {
-      id: 2,
-      destination: "Kraków, Polska",
-      dates: "5-7 Kwiecień 2024",
-      budget: { spent: 0, total: 800 },
-      status: "planning",
-      image: "/placeholder.svg", 
-      days: 3
+      id: '2',
+      title: 'Przygoda w Tokio',
+      destination: 'Tokio, Japonia',
+      dates: '10-25 maja 2024',
+      budget: '8500 zł',
+      status: 'planned',
+      latitude: 35.6762,
+      longitude: 139.6503
+    },
+    {
+      id: '3',
+      title: 'Eksploracja Islandii',
+      destination: 'Reykjavik, Islandia',
+      dates: '5-12 sierpnia 2024',
+      budget: '4200 zł',
+      status: 'planned',
+      latitude: 64.1466,
+      longitude: -21.9426
     }
   ];
 
@@ -127,13 +140,23 @@ const Travel = () => {
 
           {/* Upcoming Trips */}
           <TabsContent value="trips" className="space-y-6">
+            {/* Interactive Map */}
+            <Card className="bg-gianni-card border-border">
+              <CardHeader>
+                <CardTitle className="text-gianni-text-primary">Mapa podróży</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <TravelMap travels={upcomingTrips} />
+              </CardContent>
+            </Card>
+
             <div className="flex justify-between items-center">
               <h3 className="text-2xl font-helvetica font-medium text-gianni-text-primary">
                 Nadchodzące podróże
               </h3>
               <Button className="bg-gradient-orange hover:shadow-orange">
                 <Plus className="h-4 w-4 mr-2" />
-                Nowa podróż
+                Dodaj podróż
               </Button>
             </div>
 
@@ -156,44 +179,29 @@ const Travel = () => {
                               {trip.dates}
                             </div>
                             <div className="flex items-center gap-1">
-                              <Clock className="h-4 w-4" />
-                              {trip.days} dni
+                              <DollarSign className="h-4 w-4" />
+                              {trip.budget}
                             </div>
                           </div>
                         </div>
-                        <Badge variant={trip.status === "planned" ? "default" : "secondary"}>
-                          {trip.status === "planned" ? "Zaplanowane" : "W planowaniu"}
+                        <Badge variant={trip.status === "booked" ? "default" : "secondary"}>
+                          {trip.status === "booked" ? "Zarezerwowane" : "Planowane"}
                         </Badge>
                       </div>
 
-                      <div className="space-y-3">
-                        <div>
-                          <div className="flex justify-between text-sm mb-1">
-                            <span className="text-gianni-text-secondary">Budżet</span>
-                            <span className="text-gianni-text-primary">
-                              {trip.budget.spent}zł / {trip.budget.total}zł
-                            </span>
-                          </div>
-                          <Progress 
-                            value={(trip.budget.spent / trip.budget.total) * 100} 
-                            className="h-2"
-                          />
-                        </div>
-
-                        <div className="flex gap-2">
-                          <Button variant="outline" size="sm">
-                            <Map className="h-4 w-4 mr-2" />
-                            Szczegóły
-                          </Button>
-                          <Button variant="outline" size="sm">
-                            <DollarSign className="h-4 w-4 mr-2" />
-                            Budżet
-                          </Button>
-                          <Button variant="outline" size="sm">
-                            <Calendar className="h-4 w-4 mr-2" />
-                            Harmonogram
-                          </Button>
-                        </div>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm">
+                          <Map className="h-4 w-4 mr-2" />
+                          Szczegóły
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          <DollarSign className="h-4 w-4 mr-2" />
+                          Budżet
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          <Calendar className="h-4 w-4 mr-2" />
+                          Harmonogram
+                        </Button>
                       </div>
                     </div>
                   </div>
