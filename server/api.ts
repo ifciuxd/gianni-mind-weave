@@ -120,7 +120,7 @@ app.post('/api/friends', async (req, res) => {
     const result = await pool.query(
       `INSERT INTO friends (user_id, name, email, phone, birthday, notes, status, relationship_type, favorite)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
-      ['local-user-id', name, email, phone, birthday, notes, status, relationship_type, favorite]
+      ['d2c925fa-0c96-44a2-8251-58f9e2d17b78', name, email, phone, birthday, notes, status, relationship_type, favorite]
     );
     res.json(result.rows[0]);
   } catch (error) {
@@ -137,7 +137,7 @@ app.put('/api/friends/:id', async (req, res) => {
     const result = await pool.query(
       `UPDATE friends SET name = $1, email = $2, phone = $3, birthday = $4, notes = $5, status = $6, relationship_type = $7, favorite = $8
        WHERE id = $9 AND user_id = $10 RETURNING *`,
-      [name, email, phone, birthday, notes, status, relationship_type, favorite, id, 'local-user-id']
+      [name, email, phone, birthday, notes, status, relationship_type, favorite, id, 'd2c925fa-0c96-44a2-8251-58f9e2d17b78']
     );
     if (result.rows.length === 0) {
       res.status(404).json({ error: 'Nie znaleziono' });
@@ -156,7 +156,7 @@ app.delete('/api/friends/:id', async (req, res) => {
     const { id } = req.params;
     const result = await pool.query(
       'DELETE FROM friends WHERE id = $1 AND user_id = $2 RETURNING *',
-      [id, 'local-user-id']
+      [id, 'd2c925fa-0c96-44a2-8251-58f9e2d17b78']
     );
     if (result.rows.length === 0) {
       res.status(404).json({ error: 'Nie znaleziono' });
@@ -174,7 +174,7 @@ app.get('/api/subjects', async (req, res) => {
   try {
     const result = await pool.query(
       'SELECT * FROM subjects WHERE user_id = $1 ORDER BY name',
-      ['local-user-id']
+      ['d2c925fa-0c96-44a2-8251-58f9e2d17b78']
     );
     res.json(result.rows);
   } catch (error) {
@@ -190,7 +190,7 @@ app.post('/api/subjects', async (req, res) => {
     const result = await pool.query(
       `INSERT INTO subjects (user_id, name, code, description, credits, semester, academic_year, professor, room, schedule, status, color)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`,
-      ['local-user-id', name, code, description, credits, semester, academic_year, professor, room, schedule, status, color]
+      ['d2c925fa-0c96-44a2-8251-58f9e2d17b78', name, code, description, credits, semester, academic_year, professor, room, schedule, status, color]
     );
     res.json(result.rows[0]);
   } catch (error) {
@@ -207,7 +207,7 @@ app.put('/api/subjects/:id', async (req, res) => {
     const result = await pool.query(
       `UPDATE subjects SET name = $1, code = $2, description = $3, credits = $4, semester = $5, academic_year = $6, professor = $7, room = $8, schedule = $9, status = $10, color = $11
        WHERE id = $12 AND user_id = $13 RETURNING *`,
-      [name, code, description, credits, semester, academic_year, professor, room, schedule, status, color, id, 'local-user-id']
+      [name, code, description, credits, semester, academic_year, professor, room, schedule, status, color, id, 'd2c925fa-0c96-44a2-8251-58f9e2d17b78']
     );
     if (result.rows.length === 0) {
       res.status(404).json({ error: 'Nie znaleziono' });
@@ -226,7 +226,7 @@ app.delete('/api/subjects/:id', async (req, res) => {
     const { id } = req.params;
     const result = await pool.query(
       'DELETE FROM subjects WHERE id = $1 AND user_id = $2 RETURNING *',
-      [id, 'local-user-id']
+      [id, 'd2c925fa-0c96-44a2-8251-58f9e2d17b78']
     );
     if (result.rows.length === 0) {
       res.status(404).json({ error: 'Nie znaleziono' });
@@ -248,7 +248,7 @@ app.get('/api/assignments', async (req, res) => {
        JOIN subjects s ON a.subject_id = s.id 
        WHERE a.user_id = $1 
        ORDER BY a.due_date ASC`,
-      ['local-user-id']
+      ['d2c925fa-0c96-44a2-8251-58f9e2d17b78']
     );
     res.json(result.rows);
   } catch (error) {
@@ -264,7 +264,7 @@ app.post('/api/assignments', async (req, res) => {
     const result = await pool.query(
       `INSERT INTO assignments (subject_id, user_id, title, description, due_date, due_time, priority, status, assignment_type, max_points, earned_points, weight_percentage, notes)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *`,
-      [subject_id, 'local-user-id', title, description, due_date, due_time, priority, status, assignment_type, max_points, earned_points, weight_percentage, notes]
+      [subject_id, 'd2c925fa-0c96-44a2-8251-58f9e2d17b78', title, description, due_date, due_time, priority, status, assignment_type, max_points, earned_points, weight_percentage, notes]
     );
     res.json(result.rows[0]);
   } catch (error) {
@@ -281,7 +281,7 @@ app.put('/api/assignments/:id', async (req, res) => {
     const result = await pool.query(
       `UPDATE assignments SET subject_id = $1, title = $2, description = $3, due_date = $4, due_time = $5, priority = $6, status = $7, assignment_type = $8, max_points = $9, earned_points = $10, weight_percentage = $11, notes = $12
        WHERE id = $13 AND user_id = $14 RETURNING *`,
-      [subject_id, title, description, due_date, due_time, priority, status, assignment_type, max_points, earned_points, weight_percentage, notes, id, 'local-user-id']
+      [subject_id, title, description, due_date, due_time, priority, status, assignment_type, max_points, earned_points, weight_percentage, notes, id, 'd2c925fa-0c96-44a2-8251-58f9e2d17b78']
     );
     if (result.rows.length === 0) {
       res.status(404).json({ error: 'Nie znaleziono' });
@@ -300,7 +300,7 @@ app.delete('/api/assignments/:id', async (req, res) => {
     const { id } = req.params;
     const result = await pool.query(
       'DELETE FROM assignments WHERE id = $1 AND user_id = $2 RETURNING *',
-      [id, 'local-user-id']
+      [id, 'd2c925fa-0c96-44a2-8251-58f9e2d17b78']
     );
     if (result.rows.length === 0) {
       res.status(404).json({ error: 'Nie znaleziono' });
