@@ -14,7 +14,7 @@ import Work from "./pages/spaces/Work";
 import Ambitions from "./pages/spaces/Ambitions";
 import Health from "./pages/spaces/Health";
 import Finances from "./pages/spaces/Finances";
-import { Travel } from './pages/spaces/Travel';
+import Travel from './pages/spaces/Travel';
 import Moodboard from './pages/spaces/Moodboard';
 import Notes from './pages/spaces/Notes';
 import { Wardrobe } from './pages/spaces/Wardrobe';
